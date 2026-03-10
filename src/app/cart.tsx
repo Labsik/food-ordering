@@ -11,11 +11,11 @@ export default function CartScreen() {
   console.log("rrr", items.length);
 
   useEffect(() => {
-    if (!items) return router.push("/(tabs)/menu");
+    if (!items) return router.back();
   }, [items]);
 
   return (
-    <View>
+    <View style={{ marginHorizontal: 10 }}>
       <FlatList
         data={items}
         renderItem={({ item }) => <CartListItem cartItem={item} />}

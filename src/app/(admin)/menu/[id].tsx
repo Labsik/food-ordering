@@ -23,7 +23,7 @@ const ProductDetailsScreen = () => {
 
   if (!product)
     return (
-      <Link href={"/(tabs)/menu"}>
+      <Link href={"/(user)/menu"}>
         <Pressable>
           <Text>There is no product</Text>;
         </Pressable>
@@ -38,34 +38,8 @@ const ProductDetailsScreen = () => {
         source={{ uri: product.image ?? defaultPizzaImage }}
         style={styles.image}
       />
-      <Text>Select size</Text>
-      <View style={styles.sizes}>
-        {sizes.map((size) => (
-          <Pressable
-            onPress={() => setSelectedSize(size)}
-            style={[
-              styles.size,
-              {
-                backgroundColor: selectedSize === size ? "gainsboro" : "white",
-              },
-            ]}
-            key={size}
-          >
-            <Text
-              style={[
-                styles.sizeText,
-                { color: selectedSize === size ? "black" : "grey" },
-              ]}
-            >
-              {size}
-            </Text>
-          </Pressable>
-        ))}
-      </View>
-
+      <Text style={styles.name}>{product.name}</Text>
       <Text style={styles.price}>${product.price}</Text>
-
-      <Button onPress={addToCart} text="Add to cart" />
     </View>
   );
 };
@@ -80,26 +54,12 @@ const styles = StyleSheet.create({
     width: "100%",
     aspectRatio: 1,
   },
+  name: {
+    fontSize: 16,
+  },
   price: {
     fontSize: 18,
     fontWeight: 600,
-    marginTop: "auto",
-  },
-  sizes: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    marginVertical: 10,
-  },
-  size: {
-    width: 50,
-    aspectRatio: 1,
-    borderRadius: 25,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  sizeText: {
-    fontSize: 20,
-    fontWeight: 500,
   },
 });
 

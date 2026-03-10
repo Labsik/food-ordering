@@ -23,7 +23,7 @@ export default function MenuLayout() {
         ),
       }}
     >
-      <Stack.Screen name="index" options={{ title: "Menu" }} />
+      <Stack.Screen name="index" options={{ title: "Menu | USER" }} />
     </Stack>
   );
 }
