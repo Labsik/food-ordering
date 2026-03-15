@@ -3,27 +3,19 @@ import React, { useState } from "react";
 import { Link, useLocalSearchParams, Stack, router } from "expo-router";
 import products from "../../../../assets/data/products";
 import { defaultPizzaImage } from "../../../components/ProductListItem";
-import Button from "../../../components/Button";
-import { useCart } from "../../../providers/CartProvider";
 import { PizzaSize } from "../../../types";
-
-const sizes: PizzaSize[] = ["S", "M", "L", "XL"];
+import { FontAwesome } from "@expo/vector-icons";
+import Colors from "../../../constants/Colors";
 
 const ProductDetailsScreen = () => {
   const { id } = useLocalSearchParams();
-  const { addItem } = useCart();
-  const [selectedSize, setSelectedSize] = useState<PizzaSize>("M");
   const product = products.find((p) => p.id.toString() === id);
 
-  const addToCart = () => {
-    if (!product) return;
-    addItem(product, selectedSize);
-    router.push("/cart");
-  };
+  console.log("id", id);
 
   if (!product)
     return (
-      <Link href={"/(user)/menu"}>
+      <Link href={"/(admin)/menu"}>
         <Pressable>
           <Text>There is no product</Text>;
         </Pressable>
@@ -32,7 +24,25 @@ const ProductDetailsScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Stack.Screen options={{ title: product.name }} />
+      <Stack.Screen
+        options={{
+          title: product.name,
+          headerRight: () => (
+            <Link href={`/(admin)/menu/create?id=${id}`} asChild>
+              <Pressable>
+                {({ pressed }) => (
+                  <FontAwesome
+                    name="edit"
+                    size={25}
+                    color={Colors.light.tint}
+                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
+                  />
+                )}
+              </Pressable>
+            </Link>
+          ),
+        }}
+      />
 
       <Image
         source={{ uri: product.image ?? defaultPizzaImage }}
