@@ -14,8 +14,6 @@ type TProductListItemProps = {
 const ProductListItem: FC<TProductListItemProps> = ({ product }) => {
   const segments = useSegments();
 
-  console.log("sss", segments, segments[0]);
-
   return (
     <Link href={`./menu/${product.id}`} asChild>
       <Pressable style={styles.container}>
