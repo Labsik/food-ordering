@@ -1,11 +1,12 @@
-import { Stack } from "expo-router";
+import { Redirect, Stack } from "expo-router";
+import { useAuth } from "../../providers/AuthProvider";
 
 export default function AuthLayout() {
-  return (
-    <Stack>
-      <Stack.Screen name="index" options={{ headerTitle: "Auth" }} />
-      <Stack.Screen name="sign-in" options={{ headerTitle: "Sign In" }} />
-      <Stack.Screen name="sign-up" options={{ headerTitle: "Sign Up" }} />
-    </Stack>
-  );
+  const { session } = useAuth();
+
+  if (session) {
+    return <Redirect href={"/"} />;
+  }
+
+  return <Stack />;
 }
