@@ -30,6 +30,7 @@ export default function SignInScreen() {
         onChangeText={setEmail}
         placeholder="jon@gmail.com"
         style={styles.input}
+        keyboardType="email-address"
       />
 
       <Text style={styles.label}>Password</Text>
